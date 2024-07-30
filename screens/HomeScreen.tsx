@@ -5,7 +5,11 @@ import { useForm } from 'react-hook-form';
 const HomeScreen = ({navigation}) => {
   const { register, handleSubmit, setValue } = useForm();
   const [isRegistered, setIsRegistered] = useState(false);
-
+  const item = {
+    id: 1,
+    name: 'Item 1',
+    description: 'This is item 1',
+  };
   const onSubmit = useCallback((formData) => {
     console.log(formData.password);
     setIsRegistered(true);
@@ -46,11 +50,13 @@ const HomeScreen = ({navigation}) => {
         onChangeText={onChangeField('password')}
       />
 
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} style={styles.submitButton} />
+      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
       {isRegistered && <Text style={styles.successText}>Registration successful!</Text>}
-      <Button title="Go to details" onPress={() => navigation.navigate('Details')} style={styles.submitButton} />
-      <Button title="Go to test refresh" onPress={() => navigation.navigate('Refresh')} style={styles.submitButton} />
-      <Button title="Go to test refresh" onPress={() => navigation.navigate('Login')} style={styles.submitButton} />
+      <Button title="Details" onPress={() => navigation.navigate('Details',{item})} />
+      <Button title="Refresh" onPress={() => navigation.navigate('Refresh')} />
+      <Button title="Login" onPress={() => navigation.navigate('Login')} />
+      <Button title="Map" onPress={() => navigation.navigate('Map')} />
+      <Button title="Travel" onPress={() => navigation.navigate('Travel')} />
     </View>
   );
 };
@@ -76,6 +82,8 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     padding: 50, // Increased button size
+    marginBottom: 20, // Increased margin between boxes
+    backgroundColor:"red"
   },
   successText: {
     color: 'green',
